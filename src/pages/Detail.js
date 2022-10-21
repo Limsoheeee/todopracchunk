@@ -4,7 +4,7 @@ import { getTodoApi } from "../axios/todoApi";
 
 const Detail = () => {
   const [todo, setTodo] = useState(null);
-  const { id } = useParams;
+  const { id } = useParams();
   const navigate = useNavigate();
   const requestUpdate = useCallback(async () => {
     const res = await getTodoApi(id);
@@ -21,7 +21,7 @@ const Detail = () => {
 
   return (
     <div>
-      <button onClick={() => navigate("-1")}>뒤로가기</button>
+      <button onClick={() => navigate("/")}>뒤로가기</button>
       <p>
         {todo.title}
         </p>

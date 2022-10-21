@@ -15,7 +15,6 @@ const Form = () => {
   const navigate = useNavigate();
 
   const isEdit = useMemo(()=>(id? true : false),[id]);
-  console.log(isEdit)
 
   const onChangeHandler = useCallback((e) => {
     e.preventDefault();
@@ -24,19 +23,7 @@ const Form = () => {
   },[todo]
   );
 
-   const onSubminhandler =useCallback( (e) =>{
-    e.preventDefault();
-
-    if(isEdit){
-      dispatch(__updateTodo(todo));
-    }else{
-      dispatch(__addTodo(todo));
-    }
-    navigate('/list',{replace:true});   
-   },
-   [dispatch,isEdit,todo,navigate]);
-//id 담아 payload
-   const requestUpdate = useCallback(async() =>{
+  const requestUpdate = useCallback(async() =>{
     if(isEdit){
       const todo = await getTodoApi(id);
       setTodo(todo);
@@ -46,6 +33,20 @@ const Form = () => {
    useEffect(()=>{
     requestUpdate();
    },[requestUpdate]);
+
+   const onSubminhandler =useCallback( (e) =>{
+    e.preventDefault();
+
+    if(isEdit){
+      dispatch(__updateTodo(todo));
+    }else{
+      dispatch(__addTodo(todo));
+    }
+    navigate('/',{replace:true});   
+   },
+   [dispatch,isEdit,todo,navigate]);
+
+ 
 
   return (
     <form onSubmit={onSubminhandler}>

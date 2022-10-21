@@ -1,4 +1,4 @@
-import React, { useCallback, useState,useEffect  } from "react";
+import React, { useEffect  } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Todo from "../component/Todo";
@@ -14,10 +14,12 @@ const List = () => {
   }, [dispatch]);
   return (
     <div>
-      <button onClick={()=>{navigate('/edit')}}>등록하기</button>
+      <button onClick={()=>navigate('/edit')}>등록하기</button>
           <Todo 
-          list = {todos}
-          onRender = {(item)=><Card key={item.id}{...item}/>}
+          list = {todos}          
+          onRender = {(item)=> <Card key={item.id} {...item}/>
+      }
+
           />
         </div>
   );
